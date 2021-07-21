@@ -1,0 +1,35 @@
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+  schedule:
+    - cron: '0 1 * * *'
+
+name: R-CMD-check
+
+
+jobs:
+  R-CMD-check:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ['ubuntu-20.04', 'windows-latest', 'macOS-latest']
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Get Date
+        id: get-date
+        run: |
+          echo "::set-output name=year-week::$(/bin/date -u "+%Y-%U")"
+        shell: bash
+
+      - name: Get Info
+        run: |
+          env
+          $CONDA info
+          which -a pip
+          which -a python
+          which -a Rscript
+          which -a conda
