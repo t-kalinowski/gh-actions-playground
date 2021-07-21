@@ -29,7 +29,8 @@ jobs:
       - name: Get Info
         run: |
           env
-          $CONDA info
+          ls $CONDA
+          $CONDA/bin/conda info
           which -a pip
           which -a python
           which -a Rscript
