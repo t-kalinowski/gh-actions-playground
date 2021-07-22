@@ -35,6 +35,8 @@ jobs:
           sessionInfo()
           install.packages("sessioninfo")
           sessioninfo::session_info()
+          list.files("~")
+          # writeLines(readLines(Sys.getenv(~/)))
         shell: Rscript {0}
 
       - run: echo ${{ steps.setup-r.outputs.installed-r-version }}
@@ -50,7 +52,7 @@ jobs:
         shell: bash
 
       - name: Get Info
-        shell: bash
+        shell: bash -x
         run: |
           env
           ls -al $CONDA
@@ -66,7 +68,7 @@ jobs:
           }
 
           show_which which
-          which --help
+          which --help || true
           show_which pip
           show_which python
           show_which Rscript
