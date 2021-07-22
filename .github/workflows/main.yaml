@@ -43,8 +43,8 @@ jobs:
           crayon.enabled: 'TRUE'
 
       - name: check conda info
-      - shell: Rscript
-      - run:
+        shell: Rscript {0}
+        run:
           install.packages("reticulate")
           system2(reticulate:::miniconda_conda(Sys.getenv("CONDA")), 'info')
 
