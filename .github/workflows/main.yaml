@@ -24,7 +24,7 @@ jobs:
       - uses: r-lib/actions/setup-r@v1
         id: setup-r
         with:
-          install-r: true
+          install-r: false
 
       - run: echo ${{ steps.setup-r.outputs.installed-r-version }}
 
@@ -47,9 +47,19 @@ jobs:
           echo "Path is:"
           echo -e ${PATH//:/\\n}
 
-          $CONDA/bin/conda info
-          which -a pip
-          which -a python
-          which -a Rscript
-          which -a conda
+
+          show_which () {
+            echo "==== which $1 ==="
+            which -a "$1"
+            echo
+          }
+
+          show_which pip
+          show_which python
+          show_which Rscript
+          show_which conda
           conda info
+
+          ls $CONDA
+          tree $CONDA
+          $CONDA/bin/conda info
