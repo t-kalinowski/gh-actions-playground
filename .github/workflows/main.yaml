@@ -44,7 +44,7 @@ jobs:
 
       - name: check conda info
         shell: Rscript {0}
-        run:
+        run: |
           install.packages("reticulate")
           system2(
             reticulate:::miniconda_conda( Sys.getenv("CONDA") ),
