@@ -28,8 +28,8 @@ jobs:
           crayon.enabled: 'TRUE'
 
       - run: |
-          options()
-          installed.packages()
+          # options()
+          installed.packages()[,c("LibPath", "Version", "OS_type", "Built")]
           Sys.getenv()
           .libPaths()
           sessionInfo()
@@ -37,7 +37,7 @@ jobs:
           sessioninfo::session_info()
           list.files("~")
           # writeLines(readLines(Sys.getenv(~/)))
-        shell: Rscript {0}
+        shell: Rscript --verbose {0}
 
       - run: echo ${{ steps.setup-r.outputs.installed-r-version }}
 
@@ -55,7 +55,8 @@ jobs:
         shell: bash
         run: |
           set -x
-          export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
+          export PS4='+(${LINENO}): '
+          # export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
           env
           ls -al $CONDA
@@ -66,7 +67,7 @@ jobs:
 
           show_which () {
             echo "==== which $1 ==="
-            which -a "$1"
+            which -a "$1" || echo '<None found>'
             echo
           }
 
