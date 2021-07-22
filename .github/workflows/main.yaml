@@ -31,6 +31,7 @@ jobs:
           # options()
           installed.packages()[,c("LibPath", "Version", "OS_type", "Built")]
           Sys.getenv()
+          getwd()
           .libPaths()
           sessionInfo()
           install.packages("sessioninfo")
@@ -57,6 +58,7 @@ jobs:
           set -x
           export PS4='+(${LINENO}): '
           # export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
+          echo $PWD
 
           env
           ls -al $CONDA
@@ -65,18 +67,11 @@ jobs:
           echo -e ${PATH//:/\\n}
 
 
-          show_which () {
-            echo "==== which $1 ==="
-            which -a "$1" || echo '<None found>'
-            echo
-          }
+          which -a pip
+          which -a python
+          which -a Rscript
+          which -a conda
 
-          show_which which
-          which --help || true
-          show_which pip
-          show_which python
-          show_which Rscript
-          show_which conda
           conda info || "executable not found"
 
           ls $CONDA
