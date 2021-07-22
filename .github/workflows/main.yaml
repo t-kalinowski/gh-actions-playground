@@ -61,7 +61,7 @@ jobs:
         run: |
           system(paste(
             reticulate:::miniconda_conda(Sys.getenv("CONDA")),
-            "update -n base -c defaults conda")
+            "update -n base -c defaults conda"))
 
       - name: check conda info
         shell: Rscript {0}
