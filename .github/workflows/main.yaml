@@ -46,7 +46,9 @@ jobs:
         shell: Rscript {0}
         run:
           install.packages("reticulate")
-          system2(reticulate:::miniconda_conda(Sys.getenv("CONDA")), 'info')
+          system2(
+            reticulate:::miniconda_conda( Sys.getenv("CONDA") ),
+            'info')
 
       - name: install reticulate
         run: |
@@ -56,7 +58,7 @@ jobs:
 
       - name: test reticulate
         run: |
-          reticulate::py_install("pyyaml")
+          reticulate::py_install("tensorflow", pip=TRUE)
           reticulate::py_config()
         shell: Rscript {0}
 
