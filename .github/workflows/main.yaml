@@ -42,17 +42,19 @@ jobs:
           install-r: false
           crayon.enabled: 'TRUE'
 
+      - name: install remotes
+        run: |
+          install.packages("remotes")
+        shell: Rscript {0}
+
       - name: check conda info
         shell: Rscript {0}
         run: |
           install.packages("reticulate")
-          system2(
-            reticulate:::miniconda_conda( Sys.getenv("CONDA") ),
-            'info')
+          system2(reticulate:::miniconda_conda(Sys.getenv("CONDA")), 'info')
 
       - name: install reticulate
         run: |
-          install.packages("remotes")
           remotes::install_github("t-kalinowski/reticulate@miniconda-envs-dir")
         shell: Rscript {0}
 
