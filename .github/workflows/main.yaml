@@ -28,7 +28,8 @@ jobs:
 
       - run: echo ${{ steps.setup-r.outputs.installed-r-version }}
 
-      - run: Rscript -e 'print("hello")'
+      - run: print("hello")
+        shell: Rscript
 
 
       - name: Get Date
