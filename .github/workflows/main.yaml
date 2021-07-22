@@ -43,7 +43,9 @@ jobs:
           crayon.enabled: 'TRUE'
 
       - if: runner.os == 'macOS'
-        run: ls -al /usr/local/miniconda/pkgs
+        run: |
+          ls -al /usr/local/miniconda/pkgs
+          ls -al /usr/local/bin
 
       - name: install remotes
         run: |
