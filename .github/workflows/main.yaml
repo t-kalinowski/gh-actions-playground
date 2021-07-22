@@ -59,6 +59,9 @@ jobs:
       - if: ${{ runner.os == 'macOS' }}
         run: brew install tree
 
+      - if: ${{ runner.os == 'Windows' }}
+        run: choco install tree
+
       - name: Get Info
         shell: bash
         run: |
