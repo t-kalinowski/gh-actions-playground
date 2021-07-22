@@ -46,6 +46,7 @@ jobs:
         run: |
           ls -al /usr/local/miniconda/pkgs
           ls -al /usr/local/bin
+          ls -al ~/.conda
 
       - name: install remotes
         run: |
