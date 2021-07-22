@@ -63,6 +63,7 @@ jobs:
           }
 
           show_which which
+          which --help
           show_which pip
           show_which python
           show_which Rscript
