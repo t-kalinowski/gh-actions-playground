@@ -59,14 +59,16 @@ jobs:
       - if: ${{ runner.os == 'macOS' }}
         run: brew install tree
 
-      - if: ${{ runner.os == 'Windows' }}
-        run: choco install tree
+      - run: tree $CONDA
+
+      # - if: ${{ runner.os == 'Windows' }}
+      #   run: choco install tree
 
       - name: Get Info
         shell: bash
         run: |
           # export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
-          export PS4='+(${LINENO}): '
+          export PS4='+++++++++++++++++(${LINENO}): '
           set -x
           echo $PWD
 
@@ -84,6 +86,6 @@ jobs:
 
           conda info || echo "executable not found"
 
-          ls $CONDA
+          ls -al $CONDA
           tree $CONDA
           $CONDA/bin/conda info || echo "executable not found"
