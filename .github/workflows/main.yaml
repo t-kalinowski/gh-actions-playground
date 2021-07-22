@@ -21,7 +21,6 @@ jobs:
 
     env:
       R_COMPILE_AND_INSTALL_PACKAGES: 'never'
-      RETICULATE_MINICONDA_PATH: ${{ env.CONDA }}
 
     steps:
 
@@ -31,7 +30,8 @@ jobs:
           RSPM="https://packagemanager.rstudio.com/all/__linux__/$(lsb_release -cs)/latest"
           echo "RSPM=$RSPM" >> $GITHUB_ENV
 
-      - run: echo "RETICULATE_MINICONDA_PATH=$CONDA" >> $GITHUB_ENV
+      - name: Use runner miniconda
+        run: echo "RETICULATE_MINICONDA_PATH=$CONDA" >> $GITHUB_ENV
         shell: bash
 
       - uses: actions/checkout@master
@@ -41,6 +41,19 @@ jobs:
         with:
           install-r: false
           crayon.enabled: 'TRUE'
+
+      - name: install reticulate
+        run: |
+          install.packages("remotes")
+          remotes::install_github("t-kalinowski/reticulate")
+        shell: Rscript {0}
+
+      - name: test reticulate
+        run: |
+          reticulate::py_install("pyyaml")
+          reticulate::py_config()
+        shell: Rscript {0}
+
 
       - name: R info
         run: |
