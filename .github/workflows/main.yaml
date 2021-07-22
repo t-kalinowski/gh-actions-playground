@@ -56,6 +56,20 @@ jobs:
           install.packages("reticulate")
           system2(reticulate:::miniconda_conda(Sys.getenv("CONDA")), 'info')
 
+      - name: update conda
+        shell: Rscript {0}
+        run: |
+          system(paste(
+            reticulate:::miniconda_conda(Sys.getenv("CONDA")),
+            "update -n base -c defaults conda")
+
+      - name: check conda info
+        shell: Rscript {0}
+        run: |
+          install.packages("reticulate")
+          system2(reticulate:::miniconda_conda(Sys.getenv("CONDA")), 'info')
+
+
       - name: install reticulate
         run: |
           remotes::install_github("t-kalinowski/reticulate@miniconda-envs-dir")
