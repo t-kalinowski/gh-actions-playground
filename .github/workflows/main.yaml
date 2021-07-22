@@ -77,8 +77,8 @@ jobs:
           show_which python
           show_which Rscript
           show_which conda
-          conda info
+          conda info || "executable not found"
 
           ls $CONDA
           tree $CONDA
-          $CONDA/bin/conda info
+          $CONDA/bin/conda info  || "executable not found"
