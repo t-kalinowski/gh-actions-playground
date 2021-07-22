@@ -30,7 +30,7 @@ jobs:
           install-r: false
           crayon.enabled: 'TRUE'
 
-      - id: r-info
+      - name: R info
         run: |
           # options()
           installed.packages()[,c("LibPath", "Version", "OS_type", "Built")]
@@ -74,7 +74,7 @@ jobs:
           which -a pip
           which -a python
           which -a Rscript
-          which -a conda
+          which -a conda || "executable not found"
 
           conda info || "executable not found"
 
