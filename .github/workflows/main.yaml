@@ -21,6 +21,7 @@ jobs:
 
     env:
       R_COMPILE_AND_INSTALL_PACKAGES: 'never'
+      RETICULATE_MINICONDA_PATH: ${{ env.CONDA }}
 
     steps:
 
