@@ -18,6 +18,7 @@ jobs:
         os: ['ubuntu-20.04', 'windows-latest', 'macOS-latest']
 
     runs-on: ${{ matrix.os }}
+
     env:
       R_COMPILE_AND_INSTALL_PACKAGES: 'never'
 
@@ -53,8 +54,7 @@ jobs:
 
       - run: echo ${{ steps.setup-r.outputs.installed-r-version }}
 
-      - env:
-
+      - name: Use Miniconda
         run: |
           Sys.setenv(RETICULATE_MINICONDA_PATH=Sys.getenv("CONDA"))
           Sys.setenv(
