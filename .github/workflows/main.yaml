@@ -56,6 +56,9 @@ jobs:
           echo "::set-output name=year-week::$(/bin/date -u "+%Y-%U")"
         shell: bash
 
+      - if: ${{ runner.os == 'macOS' }}
+        run: brew install tree
+
       - name: Get Info
         shell: bash
         run: |
