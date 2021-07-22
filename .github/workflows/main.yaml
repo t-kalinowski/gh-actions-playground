@@ -52,8 +52,11 @@ jobs:
         shell: bash
 
       - name: Get Info
-        shell: bash -x
+        shell: bash
         run: |
+          set -x
+          export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
+
           env
           ls -al $CONDA
           echo "HOME is $HOME"
