@@ -25,6 +25,7 @@ jobs:
         id: setup-r
         with:
           install-r: false
+          crayon.enabled: true
 
       - run: |
           Sys.getenv()
