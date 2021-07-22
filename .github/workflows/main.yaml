@@ -20,6 +20,10 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
+      - uses: actions/checkout@master
+      - uses: r-lib/actions/setup-r@v1
+      - run: Rscript -e 'print("hello")'
+
       - name: Get Date
         id: get-date
         run: |
@@ -27,11 +31,17 @@ jobs:
         shell: bash
 
       - name: Get Info
+        shell: bash
         run: |
           env
-          ls $CONDA
+          ls -al $CONDA
+          echo "HOME is $HOME"
+          echo: "Path is:"
+          echo -e ${PATH//:/\\n}
+
           $CONDA/bin/conda info
           which -a pip
           which -a python
           which -a Rscript
           which -a conda
+          conda info
