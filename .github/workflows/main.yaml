@@ -30,7 +30,7 @@ jobs:
           install-r: false
           crayon.enabled: 'TRUE'
 
-      - id: R info
+      - id: r-info
         run: |
           # options()
           installed.packages()[,c("LibPath", "Version", "OS_type", "Built")]
