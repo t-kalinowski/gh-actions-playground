@@ -30,6 +30,9 @@ jobs:
           RSPM="https://packagemanager.rstudio.com/all/__linux__/$(lsb_release -cs)/latest"
           echo "RSPM=$RSPM" >> $GITHUB_ENV
 
+      - run: echo "RETICULATE_MINICONDA_PATH=$CONDA" >> $GITHUB_ENV
+        shell: bash
+
       - uses: actions/checkout@master
 
       - uses: r-lib/actions/setup-r@v1
@@ -56,8 +59,8 @@ jobs:
 
       - name: Use Miniconda
         run: |
-          Sys.setenv(RETICULATE_MINICONDA_PATH=Sys.getenv("CONDA"))
-          Sys.setenv(
+          # Sys.setenv(RETICULATE_MINICONDA_PATH=Sys.getenv("CONDA"))
+          # Sys.setenv(
           install.packages("reticulate")
           reticulate::py_config()
         shell: Rscript {0}
