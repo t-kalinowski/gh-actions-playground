@@ -77,10 +77,10 @@ jobs:
           which -a pip
           which -a python
           which -a Rscript
-          which -a conda || "executable not found"
+          which -a conda || echo "executable not found"
 
-          conda info || "executable not found"
+          conda info || echo "executable not found"
 
           ls $CONDA
           tree $CONDA
-          $CONDA/bin/conda info  || "executable not found"
+          $CONDA/bin/conda info || echo "executable not found"
