@@ -45,7 +45,7 @@ jobs:
       - name: install reticulate
         run: |
           install.packages("remotes")
-          remotes::install_github("t-kalinowski/reticulate")
+          remotes::install_github("t-kalinowski/reticulate@miniconda-envs-dir")
         shell: Rscript {0}
 
       - name: test reticulate
