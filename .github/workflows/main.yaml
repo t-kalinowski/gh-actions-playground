@@ -24,132 +24,144 @@ jobs:
 
     steps:
 
-      - name: Configure RSPM
-        if: runner.os == 'Linux'
-        run: |
-          RSPM="https://packagemanager.rstudio.com/all/__linux__/$(lsb_release -cs)/latest"
-          echo "RSPM=$RSPM" >> $GITHUB_ENV
-
-      - name: Use runner miniconda
-        run: echo "RETICULATE_MINICONDA_PATH=$CONDA" >> $GITHUB_ENV
+      - name: make folder
+        run: mkdir ~/foo && touch ~/foo/bar
         shell: bash
 
-      - uses: actions/checkout@master
-
-      - uses: r-lib/actions/setup-r@v1
-        id: setup-r
+      - name: Restore cache
+        uses: actions/cache@v2
         with:
-          install-r: false
-          crayon.enabled: 'TRUE'
-
-      - if: runner.os == 'macOS'
-        run: |
-          ls -al /usr/local/miniconda/pkgs
-          ls -al /usr/local/bin
-          ls -al ~/.conda
-          id
-          cat ~/.conda/environments.txt
-
-      - name: install remotes
-        run: |
-          install.packages("remotes")
-        shell: Rscript {0}
-
-      - name: check conda info
-        shell: Rscript {0}
-        run: |
-          install.packages("reticulate")
-          system2(reticulate:::miniconda_conda(Sys.getenv("CONDA")), 'info')
-
-      - name: update conda
-        shell: Rscript {0}
-        run: |
-          system(paste(
-            "sudo",
-            reticulate:::miniconda_conda(Sys.getenv("CONDA")),
-            "update -n base -c defaults conda"))
-
-      - name: check conda info
-        shell: Rscript {0}
-        run: |
-          install.packages("reticulate")
-          system2(reticulate:::miniconda_conda(Sys.getenv("CONDA")), 'info')
+          path: ~/foo
+          key: ${{ matrix.os }}-foo
 
 
-      - name: install reticulate
-        run: |
-          remotes::install_github("t-kalinowski/reticulate@miniconda-envs-dir")
-          reticulate:::miniconda_envpath()
-        shell: Rscript {0}
+      # - name: Configure RSPM
+      #   if: runner.os == 'Linux'
+      #   run: |
+      #     RSPM="https://packagemanager.rstudio.com/all/__linux__/$(lsb_release -cs)/latest"
+      #     echo "RSPM=$RSPM" >> $GITHUB_ENV
 
-      - name: test reticulate
-        run: |
-          reticulate::py_install("tensorflow", pip=TRUE)
-          reticulate::py_config()
-        shell: Rscript {0}
+      # - name: Use runner miniconda
+      #   run: echo "RETICULATE_MINICONDA_PATH=$CONDA" >> $GITHUB_ENV
+      #   shell: bash
 
+      # - uses: actions/checkout@master
 
-      - name: R info
-        run: |
-          # options()
-          installed.packages()[,c("LibPath", "Version", "OS_type", "Built")]
-          Sys.getenv()
-          getwd()
-          .libPaths()
-          sessionInfo()
-          # install.packages("sessioninfo")
-          # sessioninfo::session_info()
-          list.files("~")
-          # writeLines(readLines(Sys.getenv(~/)))
-        shell: Rscript --verbose {0}
-
-      - run: echo ${{ steps.setup-r.outputs.installed-r-version }}
-
-      - name: Use Miniconda
-        run: |
-          # Sys.setenv(RETICULATE_MINICONDA_PATH=Sys.getenv("CONDA"))
-          # Sys.setenv(
-          install.packages("reticulate")
-          reticulate::py_config()
-        shell: Rscript {0}
+      # - uses: r-lib/actions/setup-r@v1
+      #   id: setup-r
+      #   with:
+      #     install-r: false
+      #     crayon.enabled: 'TRUE'
 
 
-      - name: Get Date
-        id: get-date
-        run: |
-          echo "::set-output name=year-week::$(/bin/date -u "+%Y-%U")"
-        shell: bash
+      # - if: runner.os == 'macOS'
+      #   run: |
+      #     ls -al /usr/local/miniconda/pkgs
+      #     ls -al /usr/local/bin
+      #     ls -al ~/.conda
+      #     id
+      #     cat ~/.conda/environments.txt
 
-      # - if: ${{ runner.os == 'macOS' }}
-      #   run: brew install tree
+      # - name: install remotes
+      #   run: |
+      #     install.packages("remotes")
+      #   shell: Rscript {0}
 
-      # - run: tree $CONDA
+      # - name: check conda info
+      #   shell: Rscript {0}
+      #   run: |
+      #     install.packages("reticulate")
+      #     system2(reticulate:::miniconda_conda(Sys.getenv("CONDA")), 'info')
 
-      # - if: ${{ runner.os == 'Windows' }}
-      #   run: choco install tree
+      # - name: update conda
+      #   shell: Rscript {0}
+      #   run: |
+      #     system(paste(
+      #       "sudo",
+      #       reticulate:::miniconda_conda(Sys.getenv("CONDA")),
+      #       "update -n base -c defaults conda"))
 
-      - name: Get Info
-        shell: bash
-        run: |
-          # export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
-          export PS4='+++++++++++++++++(${LINENO}): '
-          set -x
-          echo $PWD
-
-          env
-          ls -al $CONDA
-          echo "HOME is $HOME"
-          echo "Path is:"
-          echo -e ${PATH//:/\\n}
+      # - name: check conda info
+      #   shell: Rscript {0}
+      #   run: |
+      #     install.packages("reticulate")
+      #     system2(reticulate:::miniconda_conda(Sys.getenv("CONDA")), 'info')
 
 
-          which -a pip
-          which -a python
-          which -a Rscript
-          which -a conda || echo "executable not found"
+      # - name: install reticulate
+      #   run: |
+      #     remotes::install_github("t-kalinowski/reticulate@miniconda-envs-dir")
+      #     reticulate:::miniconda_envpath()
+      #   shell: Rscript {0}
 
-          conda info || echo "executable not found"
+      # - name: test reticulate
+      #   run: |
+      #     reticulate::py_install("tensorflow", pip=TRUE)
+      #     reticulate::py_config()
+      #   shell: Rscript {0}
 
-          ls -al $CONDA
-          # tree $CONDA
-          # $CONDA/bin/conda info || echo "executable not found"
+
+      # - name: R info
+      #   run: |
+      #     # options()
+      #     installed.packages()[,c("LibPath", "Version", "OS_type", "Built")]
+      #     Sys.getenv()
+      #     getwd()
+      #     .libPaths()
+      #     sessionInfo()
+      #     # install.packages("sessioninfo")
+      #     # sessioninfo::session_info()
+      #     list.files("~")
+      #     # writeLines(readLines(Sys.getenv(~/)))
+      #   shell: Rscript --verbose {0}
+
+      # - run: echo ${{ steps.setup-r.outputs.installed-r-version }}
+
+      # - name: Use Miniconda
+      #   run: |
+      #     # Sys.setenv(RETICULATE_MINICONDA_PATH=Sys.getenv("CONDA"))
+      #     # Sys.setenv(
+      #     install.packages("reticulate")
+      #     reticulate::py_config()
+      #   shell: Rscript {0}
+
+
+      # - name: Get Date
+      #   id: get-date
+      #   run: |
+      #     echo "::set-output name=year-week::$(/bin/date -u "+%Y-%U")"
+      #   shell: bash
+
+      # # - if: ${{ runner.os == 'macOS' }}
+      # #   run: brew install tree
+
+      # # - run: tree $CONDA
+
+      # # - if: ${{ runner.os == 'Windows' }}
+      # #   run: choco install tree
+
+      # - name: Get Info
+      #   shell: bash
+      #   run: |
+      #     # export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
+      #     export PS4='+++++++++++++++++(${LINENO}): '
+      #     set -x
+      #     echo $PWD
+
+      #     env
+      #     ls -al $CONDA
+      #     echo "HOME is $HOME"
+      #     echo "Path is:"
+      #     echo -e ${PATH//:/\\n}
+
+
+      #     which -a pip
+      #     which -a python
+      #     which -a Rscript
+      #     which -a conda || echo "executable not found"
+
+      #     conda info || echo "executable not found"
+
+      #     ls -al $CONDA
+      #     # tree $CONDA
+      #     # $CONDA/bin/conda info || echo "executable not found"
