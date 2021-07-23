@@ -48,6 +48,7 @@ jobs:
           ls -al /usr/local/bin
           ls -al ~/.conda
           id
+          cat ~/.conda/environments.txt
 
       - name: install remotes
         run: |
