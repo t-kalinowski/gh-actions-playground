@@ -25,8 +25,8 @@ jobs:
         stale-pr-label: "awaiting reply"
         days-before-stale: -1
 
-        days-before-close: 0
+        days-before-close: 30
         close-issue-message: >
-          Closing because the issue author has not replied for 30 days. 
-          Please reopen if you'd like to work on this further.
+          Closing because the issue author has not replied for 30 days.
+          Please let us know if you'd like to work on this further and we'll reopen the issue.
 
