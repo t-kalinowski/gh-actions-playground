@@ -9,7 +9,7 @@ on:
   - cron: '28 11 * * *'
 
 jobs:
-  stale:
+  close-stale:
 
     runs-on: ubuntu-latest
     permissions:
