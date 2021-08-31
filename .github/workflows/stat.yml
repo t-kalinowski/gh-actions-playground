@@ -2,16 +2,12 @@ name: sit-rep
 
 on:
   workflow_dispatch:
-  issue_comment:
-    types: [created]
-  issues:
-    types: [edited]
 
 
 jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
-      - name: getenv
+      - name: sit-rep
         run: |
           env

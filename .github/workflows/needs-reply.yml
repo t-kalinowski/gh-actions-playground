@@ -1,31 +1,35 @@
-name: Close/Lock issues after inactivity
+name: Close issues after inactivity
 
 on:
   workflow_dispatch:
   schedule:
     - cron: "0 0 * * *"
 
-# if upstream action ever breaks, you can just copy the relevant bits into a github-script, e.g.:
+# if upstream action ever breaks, you can copy the relevant bits into a github-script, e.g.:
 # actions/github-script
 # https://github.com/facebookresearch/detectron2/blob/master/.github/workflows/needs-reply.yml
 
-
 jobs:
-  close-issues-needs-more-info:
+  close-issues-needs-reply:
     runs-on: ubuntu-latest
     steps:
-      - name: Close issues after no reply
+      - name: Close issues with no reply
         uses: imhoffd/needs-reply@v2.0.0
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          days-before-close: 1
-          close-message: It looks like there hasn't been a reply in 30 days, so I'm closing this issue.
+          days-before-close: 0
           issue-label: needs-reply
+          close-message: >
+            Automatically closed because there hasn't been a reply for over 30 days.
+            When you're ready to work on this further, please comment here and a bot will automatically reopen this issue.
 
-         
+
+
+
+
+
   # lock-issues-after-closed:
   #   runs-on: ubuntu-latest
-  #   if: ${{ github.repository_owner == 'facebookresearch' }}
   #   steps:
   #     - name: Lock closed issues that have no activity for a while
   #       uses: dessant/lock-threads@v2
