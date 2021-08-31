@@ -9,7 +9,7 @@ on:
 
 
 jobs:
-  remove-needs-reply-label:
+  reopen-labeled-needs-reply:
     runs-on: ubuntu-latest
     steps:
       - name: Remove needs-reply label and maybe reopen

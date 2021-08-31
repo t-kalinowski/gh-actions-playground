@@ -1,40 +1,39 @@
-name: Close issues after inactivity
+name: Close 'needs-reply' issues
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - master
   schedule:
-    - cron: "0 0 * * *"
-
-# if upstream action ever breaks, you can copy the relevant bits into a github-script, e.g.:
-# actions/github-script
-# https://github.com/facebookresearch/detectron2/blob/master/.github/workflows/needs-reply.yml
+  - cron: '28 11 * * *'
 
 jobs:
-  close-issues-needs-reply:
+  close-issues-that-need-reply:
+
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+
     steps:
-      - name: Close issues with no reply
-        uses: imhoffd/needs-reply@v2.0.0
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          days-before-close: 0
-          issue-label: needs-reply
-          close-message: >
-            Automatically closed because there hasn't been a reply for over 30 days.
-            When you're ready to work on this further, please comment here and a bot will automatically reopen this issue.
+    - uses: actions/stale@v4
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+        stale-issue-label: "needs-reply"
+        stale-pr-label: "needs-reply"
+        days-before-stale: -1
+
+        days-before-close: 0
+        close-issue-message: >
+          Closing because the issue author has not replied for 30 days.
+          Please let us know when you'd like to work on this further and we'll reopen the issue.
+
+        # close-issue-label: "no reply timeout"
 
 
 
-
-
-
-  # lock-issues-after-closed:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Lock closed issues that have no activity for a while
-  #       uses: dessant/lock-threads@v2
-  #       with:
-  #         github-token: ${{ github.token }}
-  #         issue-lock-inactive-days: '300'
-  #         process-only: 'issues'
-  #         issue-exclude-labels: 'enhancement,bug,documentation'
+https://github.com/dessant/lock-threads
+issue-lock-inactive-days
+issue-lock-reason
