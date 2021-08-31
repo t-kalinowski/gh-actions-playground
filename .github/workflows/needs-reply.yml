@@ -1,6 +1,7 @@
 name: Close/Lock issues after inactivity
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: "0 0 * * *"
 
@@ -17,6 +18,9 @@ jobs:
         uses: imhoffd/needs-reply@v2.0.0
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+          days-before-close: 1
+          close-message: It looks like there hasn't been a reply in 30 days, so I'm closing this issue.
+          issue-label: needs-reply
 
          
   # lock-issues-after-closed:

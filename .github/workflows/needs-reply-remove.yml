@@ -1,6 +1,7 @@
 name: Remove needs-reply label
 
 on:
+  workflow_dispatch:
   issue_comment:
     types: [created]
   issues:
