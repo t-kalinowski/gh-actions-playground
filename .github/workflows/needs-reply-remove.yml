@@ -13,8 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Remove needs-reply label and maybe reopen
-        if: contains(github.event.issue.labels.*.name, 'needs-reply')
+        if: contains(github.event.issue.labels.*.name, 'needs-reply') &&
         run: |
+          echo ${{ github.actor }}
+          echo ${{ github.event.issue_comment.sender }}
           gh issue edit $ISSUE --remove-label "needs-reply"
           gh issue reopen $ISSUE
         env:
