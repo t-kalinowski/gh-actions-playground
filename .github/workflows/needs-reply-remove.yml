@@ -17,7 +17,7 @@ jobs:
         run: |
           echo ${{ github.actor }}
           echo ${{ github.event.issue_comment.sender }}
-          echo ${{ toJSON(github.event.issue.labels.*.name) }}
+          echo ${{ github.event.issue.labels.*.name }}
           gh issue edit $ISSUE --remove-label "needs-reply"
           gh issue reopen $ISSUE
         env:
