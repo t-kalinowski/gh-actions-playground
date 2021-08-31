@@ -1,4 +1,4 @@
-name: Remove needs-reply label
+name: sit-rep
 
 on:
   workflow_dispatch:
