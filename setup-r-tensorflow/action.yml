@@ -17,6 +17,8 @@ defaults:
 
 runs:
   using: "composite"
+  defaults:
+    shell: Rscript {0}
   steps:
 
     - uses: actions/checkout@v2
