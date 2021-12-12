@@ -30,6 +30,8 @@ runs:
 
     - name: Install Miniconda
       run: reticulate::install_miniconda()
+      shell: Rscript {0}
 
     - name: Install TensorFlow
       run: tensorflow::install_tensorflow(version = '${{ inputs.tf-version }}')
+      shell: Rscript {0}
