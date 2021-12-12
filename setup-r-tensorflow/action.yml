@@ -34,7 +34,7 @@ runs:
         use-public-rspm: true
         install-r: ${{ inputs.install-r }}
 
-    - uses: r-lib/actions/setup-r-dependencies@main
+    - uses: r-lib/actions/setup-r-dependencies@v2
       with:
         cache-version: 1 # bump to invalidate cache
         extra-packages: rcmdcheck remotes tensorflow
