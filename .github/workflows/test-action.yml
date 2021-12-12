@@ -1,4 +1,4 @@
-name: Close 'needs reply' issues
+name: 'test setup-r-tensorflow'
 
 on:
   workflow_dispatch:
