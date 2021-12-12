@@ -22,7 +22,7 @@ runs:
       with:
         r-version: ${{ inputs.r-version }}
         Ncpus: '2L'
-        crayon.enabled: 'TRUE'
+        # crayon.enabled: 'TRUE'
         use-public-rspm: true
         install-r: ${{ inputs.install-r }}
 
