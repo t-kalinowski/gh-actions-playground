@@ -30,3 +30,4 @@ jobs:
       - uses: t-kalinowski/gh-actions-playground/setup-r-tensorflow@main
         with:
           install-r: false
+          install-miniconda: false
