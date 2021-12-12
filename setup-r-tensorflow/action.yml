@@ -8,6 +8,8 @@ inputs:
   r-version:
     description: "R version"
     default: "release"
+  install-r:
+    default: true
 
 runs:
   using: "composite"
@@ -22,6 +24,7 @@ runs:
         Ncpus: '2L'
         crayon.enabled: 'TRUE'
         use-public-rspm: true
+        install-r: ${{ inputs.install-r }}
 
     - uses: r-lib/actions/setup-r-dependencies@master
       with:
