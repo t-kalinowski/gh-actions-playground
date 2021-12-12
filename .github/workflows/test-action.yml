@@ -27,4 +27,4 @@ jobs:
 
 
     steps:
-      - uses: t-kalinowski/gh-actions-playground/setup-r-tensorflow@v1
+      - uses: t-kalinowski/gh-actions-playground/setup-r-tensorflow@main
