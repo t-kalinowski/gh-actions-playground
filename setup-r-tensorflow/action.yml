@@ -32,7 +32,9 @@ runs:
     - uses: r-lib/actions/setup-r-dependencies@master
       with:
         cache-version: 1 # bump to invalidate cache
-        extra-packages: rcmdcheck remotes rstudio/tensorflow
+        extra-packages: rcmdcheck remotes tensorflow
+
+    - run: pak::pkg_install("rstudio/tensorflow")
 
     - name: Install Miniconda
       run: reticulate::install_miniconda()
