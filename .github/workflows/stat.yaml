@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: sit-rep
         run: |
-          where python
           where conda
+          where python
           where R
           
