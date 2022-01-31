@@ -19,3 +19,6 @@ jobs:
           where R
         shell: cmd.exe
           
+    # - uses: actions/checkout@v2
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
