@@ -17,4 +17,5 @@ jobs:
           where conda
           where python
           where R
+        shell: cmd.exe
           
