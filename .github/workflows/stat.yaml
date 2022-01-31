@@ -6,8 +6,11 @@ on:
 
 jobs:
   job1:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: sit-rep
         run: |
-          which -a python
+          where python
+          where conda
+          where R
+          
