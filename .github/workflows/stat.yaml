@@ -17,7 +17,7 @@ jobs:
           where conda
           where python
           where R
-        shell: cmd.exe
+        shell: cmd
           
     # - uses: actions/checkout@v2
       - name: Setup tmate session
