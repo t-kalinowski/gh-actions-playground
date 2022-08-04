@@ -8,6 +8,9 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
-      - name: sit-rep
-        run: |
-          which -a python
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
