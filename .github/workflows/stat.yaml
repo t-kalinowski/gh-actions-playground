@@ -9,16 +9,30 @@ on:
 
 
 jobs:
-  job1:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v4
-        with:
-          python-version: 3.9
+  R-CMD-check:
+    name: ${{ matrix.os[:-5] }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest] #, windows-latest, macOS-latest]
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+
+    steps:
+      - uses: actions/checkout@v3
+
+# jobs:
+#   job1:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - uses: actions/setup-python@v4
+#         with:
+#           python-version: 3.9
+
+#       - name: Setup tmate session
+#         uses: mxschmitt/action-tmate@v3
 
       # - name: sit-rep
       #   run: |
