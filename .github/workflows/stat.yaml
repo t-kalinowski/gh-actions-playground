@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest] #, windows-latest, macOS-latest]
+        os: [ubuntu-latest, windows-latest, macOS-latest]
 
 
     steps:
@@ -28,6 +28,8 @@ jobs:
           # install R on mac because the default image ships w/ homebrew R,
           # which is incompatible w/ CRAN binaries.
           install-r: startsWith(${{ matrix.os }}, "macOS")
+
+      - run: Rscript --version
 
 # jobs:
 #   job1:
