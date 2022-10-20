@@ -10,7 +10,7 @@ on:
 
 jobs:
   R-CMD-check:
-    name: ${{ matrix.os[:-5] }}
+    name: ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 15
     strategy:
