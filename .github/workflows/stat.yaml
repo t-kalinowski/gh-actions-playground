@@ -31,6 +31,19 @@ jobs:
 
       - run: Rscript --version
 
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - run: which -a python
+        shell: bash
+
+      - shell: bash
+        run: env
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+
 # jobs:
 #   job1:
 #     runs-on: ubuntu-latest
@@ -40,8 +53,6 @@ jobs:
 #         with:
 #           python-version: 3.9
 
-#       - name: Setup tmate session
-#         uses: mxschmitt/action-tmate@v3
 
       # - name: sit-rep
       #   run: |
