@@ -7,7 +7,7 @@ on:
   #   branches: [main, master]
   workflow_dispatch:
 
-name: R-CMD-check
+name: install-miniconda
 
 jobs:
   R-CMD-check:
