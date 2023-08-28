@@ -2,10 +2,10 @@ name: sit-rep
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - master
-      - main
+  # push:
+  #   branches:
+  #     - master
+  #     - main
 
 
 jobs:
