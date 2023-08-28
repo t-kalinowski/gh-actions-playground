@@ -20,12 +20,12 @@ jobs:
       matrix:
         config:
           # - {os: macOS-latest,    r: 'release'}
-          # - {os: windows-latest,  r: 'release'}
+          - {os: windows-latest,  r: 'release'}
           - {os: windows-latest,  r: '3.6'}
-          - {os: windows-latest,  r: '4.0'}
-          - {os: windows-latest,  r: '4.1'}
-          - {os: windows-latest,  r: '4.2'}
-          - {os: windows-latest,  r: '4.3'}
+          # - {os: windows-latest,  r: '4.0'}
+          # - {os: windows-latest,  r: '4.1'}
+          # - {os: windows-latest,  r: '4.2'}
+          # - {os: windows-latest,  r: '4.3'}
           # - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
           # - {os: ubuntu-latest,   r: 'release'}
           # - {os: ubuntu-latest,   r: 'oldrel-1'}
@@ -50,6 +50,9 @@ jobs:
         with:
           extra-packages: any::rcmdcheck, any::tensorflow
           needs: check
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
 
       - name: install miniconda / tensorflow
         run: |
