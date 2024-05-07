@@ -29,20 +29,35 @@ jobs:
           # which is incompatible w/ CRAN binaries.
           install-r: ${{ startsWith(matrix.os, 'macOS') }}
 
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          cache-version: 1
+          upgrade: 'TRUE'
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: reticulate
+
+          #local::. rcmdcheck remotes tensorflow
+          # cache-version: 1 # bump to invalidate cache
+
       - run: Rscript --version
 
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.8'
+      # - uses: actions/setup-python@v4
+      #   with:
+      #     python-version: '3.8'
 
-      - run: which -a python
-        shell: bash
+      - run: reticulate::virtualenv_starter(all = TRUE)
+        shell: Rscript {0}
 
-      - shell: bash
-        run: env
+      # - run: which -a python
+      #   shell: bash
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+      # - shell: bash
+      #   run: env
+
+      # - name: Setup tmate session
+      #   uses: mxschmitt/action-tmate@v3
 
 # jobs:
 #   job1:

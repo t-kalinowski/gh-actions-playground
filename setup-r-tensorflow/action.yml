@@ -10,8 +10,8 @@ inputs:
     default: "release"
   install-r:
     default: true
-  install-miniconda:
-    default: true
+  python-version:
+    default: ~
 
 
 runs:
