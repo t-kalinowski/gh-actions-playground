@@ -55,6 +55,9 @@ jobs:
       - run: which -a python
         shell: bash
 
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+ 
       - name: setup r-reticulate venv
         shell: Rscript {0}
         run: |
@@ -82,8 +85,6 @@ jobs:
       #   uses: mxschmitt/action-tmate@v3
       # - run: R -e 'reticulate::virtualenv_starter(all = TRUE)'
         
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
 
 # jobs:
 #   job1:
