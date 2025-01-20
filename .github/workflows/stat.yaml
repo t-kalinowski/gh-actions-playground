@@ -16,7 +16,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-latest]
+        # os: [ubuntu-latest, windows-latest, macOS-latest]
 
 
     steps:
@@ -29,6 +30,7 @@ jobs:
           # which is incompatible w/ CRAN binaries.
           install-r: ${{ startsWith(matrix.os, 'macOS') }}
 
+      - run: Rscript --version
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: reticulate
@@ -36,7 +38,6 @@ jobs:
           #local::. rcmdcheck remotes tensorflow
           # cache-version: 1 # bump to invalidate cache
 
-      - run: Rscript --version
 
       # - uses: actions/setup-python@v4
       #   with:
