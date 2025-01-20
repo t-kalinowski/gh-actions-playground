@@ -28,7 +28,7 @@ jobs:
           use-public-rspm: true
           # install R on mac because the default image ships w/ homebrew R,
           # which is incompatible w/ CRAN binaries.
-          install-r: ${{ startsWith(matrix.os, 'macOS') }}
+          # install-r: ${{ startsWith(matrix.os, 'macOS') }}
 
       - run: Rscript --version
       - uses: r-lib/actions/setup-r-dependencies@v2
