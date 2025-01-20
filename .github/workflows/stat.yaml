@@ -52,6 +52,8 @@ jobs:
       - run: reticulate::virtualenv_starter(all = TRUE)
         shell: Rscript {0}
 
+      - run: which -a python
+        shell: bash
 
       - name: setup r-reticulate venv
         shell: Rscript {0}
@@ -72,8 +74,6 @@ jobs:
             paste0("RETICULATE_PYTHON=", virtualenv_python(path_to_venv)),
             Sys.getenv("GITHUB_ENV"))
 
-      # - run: which -a python
-      #   shell: bash
 
       # - shell: bash
       #   run: env
