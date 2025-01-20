@@ -20,7 +20,7 @@ jobs:
 
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: r-lib/actions/setup-r@v2
         with:
@@ -30,9 +30,6 @@ jobs:
           install-r: ${{ startsWith(matrix.os, 'macOS') }}
 
       - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          cache-version: 1
-          upgrade: 'TRUE'
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
@@ -58,6 +55,10 @@ jobs:
 
       # - name: Setup tmate session
       #   uses: mxschmitt/action-tmate@v3
+      - run: R -e 'reticulate::virtualenv_starter(all = TRUE)'
+        
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
 
 # jobs:
 #   job1:
