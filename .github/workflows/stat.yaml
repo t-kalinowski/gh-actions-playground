@@ -31,12 +31,18 @@ jobs:
           # install-r: ${{ startsWith(matrix.os, 'macOS') }}
 
       - run: Rscript --version
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: reticulate
+          upgrade: 'TRUE'
+          cache-version: 1 # bump to invalidate cache
 
           #local::. rcmdcheck remotes tensorflow
-          # cache-version: 1 # bump to invalidate cache
 
 
       # - uses: actions/setup-python@v4
@@ -46,6 +52,26 @@ jobs:
       - run: reticulate::virtualenv_starter(all = TRUE)
         shell: Rscript {0}
 
+
+      - name: setup r-reticulate venv
+        shell: Rscript {0}
+        run: |
+
+          library(reticulate)
+
+          path_to_venv <- virtualenv_create(
+            envname = "r-reticulate",
+            python = Sys.which("python"), # placed on PATH by the setup-python action
+            packages = c(
+              "docutils", "pandas", "scipy", "matplotlib", "ipython",
+              "tabulate", "plotly", "psutil", "kaleido", "wrapt"
+            )
+          )
+
+          writeLines(
+            paste0("RETICULATE_PYTHON=", virtualenv_python(path_to_venv)),
+            Sys.getenv("GITHUB_ENV"))
+
       # - run: which -a python
       #   shell: bash
 
@@ -54,7 +80,7 @@ jobs:
 
       # - name: Setup tmate session
       #   uses: mxschmitt/action-tmate@v3
-      - run: R -e 'reticulate::virtualenv_starter(all = TRUE)'
+      # - run: R -e 'reticulate::virtualenv_starter(all = TRUE)'
         
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
