@@ -1,11 +1,11 @@
-name: sit-rep
+name: stat
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     - master
-  #     - main
+  push:
+    branches:
+      - master
+      - main
 
 
 jobs:
@@ -28,8 +28,6 @@ jobs:
           # install R on mac because the default image ships w/ homebrew R,
           # which is incompatible w/ CRAN binaries.
           install-r: ${{ startsWith(matrix.os, 'macOS') }}
-
-      - uses: r-lib/actions/setup-r-dependencies@v2
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
