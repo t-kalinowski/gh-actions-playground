@@ -40,42 +40,47 @@ jobs:
         with:
           extra-packages: reticulate
           upgrade: 'TRUE'
-          cache-version: 1 # bump to invalidate cache
+          cache-version: 2 # bump to invalidate cache
 
           #local::. rcmdcheck remotes tensorflow
 
+      - run: |
+          print(uv <- reticulate:::uv_binary())
+          system2(uv, "--version")
+          system2(uv, "self update")
+        shell: Rscript {0}
 
       # - uses: actions/setup-python@v4
       #   with:
       #     python-version: '3.8'
 
-      - run: reticulate::virtualenv_starter(all = TRUE)
-        shell: Rscript {0}
+      # - run: reticulate::virtualenv_starter(all = TRUE)
+      #   shell: Rscript {0}
 
-      - run: which -a python
-        shell: bash
+      # - run: which -a python
+      #   shell: bash
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
- 
-      - name: setup r-reticulate venv
-        shell: Rscript {0}
-        run: |
+      # - name: Setup tmate session
+      #   uses: mxschmitt/action-tmate@v3
 
-          library(reticulate)
+      # - name: setup r-reticulate venv
+      #   shell: Rscript {0}
+      #   run: |
 
-          path_to_venv <- virtualenv_create(
-            envname = "r-reticulate",
-            python = Sys.which("python"), # placed on PATH by the setup-python action
-            packages = c(
-              "docutils", "pandas", "scipy", "matplotlib", "ipython",
-              "tabulate", "plotly", "psutil", "kaleido", "wrapt"
-            )
-          )
+      #     library(reticulate)
 
-          writeLines(
-            paste0("RETICULATE_PYTHON=", virtualenv_python(path_to_venv)),
-            Sys.getenv("GITHUB_ENV"))
+      #     path_to_venv <- virtualenv_create(
+      #       envname = "r-reticulate",
+      #       python = Sys.which("python"), # placed on PATH by the setup-python action
+      #       packages = c(
+      #         "docutils", "pandas", "scipy", "matplotlib", "ipython",
+      #         "tabulate", "plotly", "psutil", "kaleido", "wrapt"
+      #       )
+      #     )
+
+      #     writeLines(
+      #       paste0("RETICULATE_PYTHON=", virtualenv_python(path_to_venv)),
+      #       Sys.getenv("GITHUB_ENV"))
 
 
       # - shell: bash
@@ -84,7 +89,7 @@ jobs:
       # - name: Setup tmate session
       #   uses: mxschmitt/action-tmate@v3
       # - run: R -e 'reticulate::virtualenv_starter(all = TRUE)'
-        
+
 
 # jobs:
 #   job1:
