@@ -38,7 +38,8 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: reticulate
+          # https://r-lib.github.io/pkgdepends/reference/pkg_refs.html#github-packages-
+          extra-packages: rstudio/reticulate
           upgrade: 'TRUE'
           cache-version: 2 # bump to invalidate cache
 
